@@ -4,6 +4,8 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
 
+
+
 // Настройка Google Sheets
 const SHEETS_TO_SEARCH = ["сумочкиД", "парасольки", "гаманці"];
 const SPREADSHEET_ID = '1igXH4QWYkwn0shFAFbJVyw2qn76J1KRXUDR2k-088fg';
@@ -35,6 +37,7 @@ app.get('/search', async (req, res) => {
     }
 
     const doc = new GoogleSpreadsheet(SPREADSHEET_ID);
+    console.log("Current server time:", new Date().toISOString());
 
     try {
         await doc.useServiceAccountAuth({
