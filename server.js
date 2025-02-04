@@ -37,7 +37,11 @@ app.get('/search', async (req, res) => {
     const doc = new GoogleSpreadsheet(SPREADSHEET_ID);
 
     try {
-        await doc.useServiceAccountAuth(credentials);
+        await doc.useServiceAccountAuth({
+            client_email: process.env.GOOGLE_CLIENT_EMAIL,
+            private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+          });
+          
         await doc.loadInfo();
 
         const foundProducts = [];
